@@ -267,10 +267,8 @@ public class TableMetaDataContext {
 	 */
 	public List<Object> matchInParameterValuesWithInsertColumns(Map<String, ?> inParameters) {
 		List<Object> values = new ArrayList<>(this.tableColumns.size());
-		
 		LinkedCaseInsensitiveMap<Object> caseInsensitiveLookup = new LinkedCaseInsensitiveMap<>(inParameters.size());
 		caseInsensitiveLookup.putAll(inParameters);
-		
 		for (String column : this.tableColumns) {
 			Object value = inParameters.get(column);
 			if (value == null) {
