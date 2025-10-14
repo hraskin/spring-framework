@@ -22,6 +22,10 @@ sonar {
 	}
 }
 
+tasks.named('sonar').configure {
+	mustRunAfter tasks.withType(Test)
+}
+
 description = "Spring Framework"
 
 configure(allprojects) { project ->
@@ -38,7 +42,8 @@ configure(allprojects) { project ->
 	}
 	configurations.all {
 		resolutionStrategy {
-			force 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:latest.release'
+			cacheChangingModulesFor 0, "seconds"
+			cacheDynamicVersionsFor 0, "seconds"
 		}
 	}
 }
@@ -91,4 +96,8 @@ configure([rootProject] + javaProjects) { project ->
 
 configure(moduleProjects) { project ->
 	apply from: "${rootDir}/gradle/spring-module.gradle"
+}
+
+subprojects {
+	apply plugin: "org.sonarqube"
 }
