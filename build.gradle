@@ -38,8 +38,7 @@ configure(allprojects) { project ->
 	}
 	configurations.all {
 		resolutionStrategy {
-			cacheChangingModulesFor 0, "seconds"
-			cacheDynamicVersionsFor 0, "seconds"
+			force 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:latest.release'
 		}
 	}
 }
