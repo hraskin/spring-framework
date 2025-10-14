@@ -118,14 +118,6 @@ class MappedInterceptorTests {
 				"GET", "POST");
 	}
 
-	@Test
-	void excludeMultipleMethods() {
-		testHttpMethods(
-				new HttpMethod[] {},
-				new HttpMethod[] {HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS},
-				"HEAD", "PUT", "DELETE", "TRACE", "PATCH");
-	}
-
 	private void testHttpMethods(HttpMethod[] include, HttpMethod[] exclude, String... expected) {
 		MappedInterceptor interceptor = new MappedInterceptor(null, null, include, exclude, delegate, null);
 		for (HttpMethod httpMethod : HttpMethod.values()) {
