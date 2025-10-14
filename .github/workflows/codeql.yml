@@ -28,7 +28,7 @@ jobs:
         queries: ./codeql
 
     - name: Build project
-      run: ./gradlew build -x test
+      run: ./gradlew clean assemble -x test -x check -x compileTestJava -x testFixturesClasses -x testFixturesJar
 
     - name: Perform CodeQL analysis
       uses: github/codeql-action/analyze@v3
