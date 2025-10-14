@@ -28,7 +28,7 @@ jobs:
         queries: ./codeql
 
     - name: Build project
-      run: mvn clean install -DskipTests
+      run: ./gradlew build -x test
 
     - name: Perform CodeQL analysis
       uses: github/codeql-action/analyze@v3
