@@ -11,7 +11,7 @@ analysis_metrics:
 
   radar:
     - id: cyclomatic_complexity
-      checked: true
+      checked: false
       source: CodeQL
       thresholds:
         a:
@@ -31,7 +31,7 @@ analysis_metrics:
           upper_bound: 100  # Upper limit is +15
 
     - id: cognitive_complexity
-      checked: false
+      checked: true
       source: Sonar
       thresholds:
         a:
