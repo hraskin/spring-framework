@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ */ 
 
 package org.springframework.test.web.reactive.server;
 
@@ -67,7 +67,8 @@ class DefaultWebTestClientBuilder implements WebTestClient.Builder {
 	static {
 		ClassLoader loader = DefaultWebTestClientBuilder.class.getClassLoader();
 		REACTOR_NETTY_CLIENT_PRESENT = ClassUtils.isPresent("reactor.netty.http.client.HttpClient", loader);
-		JETTY_CLIENT_PRESENT = ClassUtils.isPresent("org.eclipse.jetty.client.HttpClient", loader);
+		JETTY_CLIENT_PRESENT = ClassUtils.isPresent("org.eclipse.jetty.client.HttpClient", loader) &&
+				ClassUtils.isPresent("org.eclipse.jetty.reactive.client.ReactiveRequest", loader);
 		HTTP_COMPONENTS_CLIENT_PRESENT =
 				ClassUtils.isPresent("org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient", loader) &&
 						ClassUtils.isPresent("org.apache.hc.core5.reactive.ReactiveDataConsumer", loader);
