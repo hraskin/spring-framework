@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ */ 
 
 package org.springframework.aop.scope;
 
@@ -84,11 +84,15 @@ public abstract class ScopedProxyUtils {
 		proxyDefinition.setPrimary(targetDefinition.isPrimary());
 		if (targetDefinition instanceof AbstractBeanDefinition abd) {
 			proxyDefinition.copyQualifiersFrom(abd);
+			proxyDefinition.setDefaultCandidate(abd.isDefaultCandidate());
 		}
 
 		// The target bean should be ignored in favor of the scoped proxy.
 		targetDefinition.setAutowireCandidate(false);
 		targetDefinition.setPrimary(false);
+		if (targetDefinition instanceof AbstractBeanDefinition abd) {
+			abd.setDefaultCandidate(false);
+		}
 
 		// Register the target bean as separate bean in the factory.
 		registry.registerBeanDefinition(targetBeanName, targetDefinition);
