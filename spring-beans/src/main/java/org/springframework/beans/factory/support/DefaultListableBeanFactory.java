@@ -142,7 +142,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	 * explicitly setting this flag to "false" rather than leaving it unspecified.
 	 * @since 6.2.6
 	 * @see #preInstantiateSingletons()
-	 */
+	 */ 
 	public static final String STRICT_LOCKING_PROPERTY_NAME = "spring.locking.strict";
 
 	private static @Nullable Class<?> jakartaInjectProviderClass;
