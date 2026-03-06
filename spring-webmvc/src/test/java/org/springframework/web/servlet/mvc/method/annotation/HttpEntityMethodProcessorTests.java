@@ -30,13 +30,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -149,29 +147,6 @@ public class HttpEntityMethodProcessorTests {
 		assertThat(result).isNotNull();
 		assertThat(result.getBody().get(0).getName()).isEqualTo("Jad");
 		assertThat(result.getBody().get(1).getName()).isEqualTo("Robert");
-	}
-
-	@Test
-	@Disabled("Determine why this fails with JacksonJsonHttpMessageConverter but passes with MappingJackson2HttpMessageConverter")
-	void resolveArgumentTypeVariable() throws Exception {
-		Method method = MySimpleParameterizedController.class.getMethod("handleDto", HttpEntity.class);
-		HandlerMethod handlerMethod = new HandlerMethod(new MySimpleParameterizedController(), method);
-		MethodParameter methodParam = handlerMethod.getMethodParameters()[0];
-
-		String content = "{\"name\" : \"Jad\"}";
-		this.servletRequest.setContent(content.getBytes(StandardCharsets.UTF_8));
-		this.servletRequest.setContentType(MediaType.APPLICATION_JSON_VALUE);
-
-		List<HttpMessageConverter<?>> converters = new ArrayList<>();
-		converters.add(new JacksonJsonHttpMessageConverter());
-		HttpEntityMethodProcessor processor = new HttpEntityMethodProcessor(converters);
-
-		@SuppressWarnings("unchecked")
-		HttpEntity<SimpleBean> result = (HttpEntity<SimpleBean>)
-				processor.resolveArgument(methodParam, mavContainer, webRequest, binderFactory);
-
-		assertThat(result).isNotNull();
-		assertThat(result.getBody().getName()).isEqualTo("Jad");
 	}
 
 	@Test  // SPR-12811

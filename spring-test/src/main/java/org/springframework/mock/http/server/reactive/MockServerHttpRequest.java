@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ */ 
 
 package org.springframework.mock.http.server.reactive;
 
@@ -182,6 +182,16 @@ public final class MockServerHttpRequest extends AbstractServerHttpRequest {
 	 */
 	public static BaseBuilder<?> options(String urlTemplate, @Nullable Object... uriVars) {
 		return method(HttpMethod.OPTIONS, urlTemplate, uriVars);
+	}
+
+	/**
+	 * HTTP QUERY variant. See {@link #get(String, Object...)} for general info.
+	 * @param urlTemplate a URL template; the resulting URL will be encoded
+	 * @param uriVars zero or more URI variables
+	 * @return the created builder
+	 */
+	public static BodyBuilder query(String urlTemplate, @Nullable Object... uriVars) {
+		return method(HttpMethod.QUERY, urlTemplate, uriVars);
 	}
 
 	/**
